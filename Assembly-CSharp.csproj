@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{B2B58FB2-4462-6B0C-A872-40DD957E5FE0}</ProjectGuid>
+	<ProjectGuid>{D619D0D9-0FC7-1538-20A5-FCA3ECC53ED3}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -48,11 +48,16 @@
   <ItemGroup>
      <Compile Include="Assets\Date\TestModel.cs" />
      <Compile Include="Assets\Script\ApiTest.cs" />
+     <Compile Include="Assets\Script\Common\UGUIEventTriger.cs" />
+     <Compile Include="Assets\Script\MainController.cs" />
      <Compile Include="Assets\Script\MiniJSON.cs" />
      <Compile Include="Assets\Script\RegistrationController.cs" />
+     <Compile Include="Assets\Script\UI\FlickManager.cs" />
+     <Compile Include="Assets\Script\UI\FooterManager.cs" />
      <Compile Include="Assets\Script\server\DBUsers.cs" />
      <Compile Include="Assets\Script\server\LoginManager.cs" />
      <Compile Include="Assets\Script\server\TestPHP.cs" />
+     <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -63,7 +68,7 @@
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="LitJson">
- <HintPath>/Users/hsyknksn/Desktop/New Unity Project/Assets/LitJson.dll</HintPath>
+ <HintPath>/Users/hsyknksn/Desktop/ffbe_unity/Assets/LitJson.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>/Applications/Unity/Unity.app/Contents/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
@@ -71,7 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{79391AC5-8752-B4CC-F33F-BB9EB1094377}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+      <Project>{7B6FB3C8-636F-6BD8-114F-9C8A1B444F96}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

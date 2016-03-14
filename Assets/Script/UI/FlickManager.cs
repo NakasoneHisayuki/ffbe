@@ -20,6 +20,7 @@ public class FlickManager : MonoBehaviour {
 	private float[] flickPosiX;
 	float scaleSizeSpeed = 0.0f;
 	float distance = 0.0f;
+	float posi = 0.0f;
 	private int[] chengeScaleObj = new int[2];
 
 	public bool[] isFlickPosi;
@@ -64,12 +65,11 @@ public class FlickManager : MonoBehaviour {
 			this.moveObjPosition = this.TouchPosition();
 		}
 		if(this.isMoveObj){
-			Debug.Log(this.moveObjPosition);
 			this.MoveObj(this.moveObjPosition);	
 		}
 	}
 
-	float posi = 0.0f;
+
 	private void MoveObj(Vector2 movePosi){
 		this.Move(movePosi);
 
@@ -80,28 +80,30 @@ public class FlickManager : MonoBehaviour {
 		if(this.isButton){
 			this.flickContents.localPosition = new Vector2(movePosi.x, movePosi.y);
 		}else{
-			this.posi = this.Distance(movePosi);
-			Debug.Log("posi : " + posi);
+
+			this.posi = this.Distance(this.flickContents.localPosition);
 
 			if(Math.Floor(posi) == 0.0f || Math.Floor(posi) == 315.0f){
-				Debug.Log("end");
+
 				this.isMoveObj = false;
+				this.flickContents.localPosition = new Vector2((float)Math.Floor(this.flickContents.localPosition.x), movePosi.y);
 			}else{
-				
+				float speed = 2.0f * Time.deltaTime;
 				if(posi >= this.middleDistance){
 					// 戻る
 					Debug.Log("戻る");
-					this.flickContents.localPosition = Vector2.MoveTowards(new Vector2(this.zeroPosi,this.zeroPosi), new Vector2(movePosi.x,this.zeroPosi), 2.0f);
+					this.flickContents.localPosition = Vector2.MoveTowards(new Vector2(this.zeroPosi,this.zeroPosi), new Vector2(posi,this.zeroPosi), speed);
 				}else{
 					// 移動
 					Debug.Log("移動");
-					this.flickContents.localPosition = Vector2.MoveTowards(new Vector2(this.flickPosition,this.zeroPosi), new Vector2(movePosi.x,this.zeroPosi), 2.0f);
+					this.flickContents.localPosition = Vector2.MoveTowards(new Vector2(this.flickPosition,this.zeroPosi), new Vector2(movePosi.x,this.zeroPosi), speed);
 					
 				}
 				
 			}
 			
 		}
+		this.Scale();
 		
 	}
 
@@ -112,32 +114,44 @@ public class FlickManager : MonoBehaviour {
 
 		switch(this.sliders){
 			case slider.right:
-				this.distance = Vector2.Distance(new Vector2(startDistance.x, this.zeroPosi), new Vector2(this.flickPositionX[1], this.zeroPosi));
 				this.flickPosition = this.flickPositionX[1];
-//				if(Math.Floor(flickContents.localPosition.x) >= 10.0f && this.isFlickPosi[0]){
-//					this.OutsideObject();
-//					this.isFlickPosi[0] = false;
-//					rectTrans1 = this.buttons[this.chengeScaleObj[1]].GetComponent<RectTransform>();
-//					rectTrans2 = this.buttons[this.chengeScaleObj[0]].GetComponent<RectTransform>();
-//
-//				}
 				
 			break;
 			case slider.left:
-				this.distance = Vector2.Distance(new Vector2(startDistance.x, this.zeroPosi), new Vector2(this.flickPositionX[0], this.zeroPosi));
 				this.flickPosition = this.flickPositionX[0];
-//				if(Math.Floor(flickContents.localPosition.x) <= -10.0f && this.isFlickPosi[1]){
-//					this.OutsideObject();
-//					this.isFlickPosi[1] = false;
-//					rectTrans1 = this.buttons[this.chengeScaleObj[0]].GetComponent<RectTransform>();
-//					rectTrans2 = this.buttons[this.chengeScaleObj[1]].GetComponent<RectTransform>();
-//				}
 
 			break;
 		}
-//		this.ScaleSizeObj(rectTrans1,rectTrans2);
+		this.distance = Vector2.Distance(new Vector2(startDistance.x, this.zeroPosi), new Vector2(this.flickPosition, this.zeroPosi));
 		return distance;
 
+	}
+
+	private void Scale(){
+		switch(this.sliders){
+			case slider.right:
+
+				if(Math.Floor(flickContents.localPosition.x) >= 10.0f && this.isFlickPosi[0]){
+					this.OutsideObject();
+					this.isFlickPosi[0] = false;
+					rectTrans1 = this.buttons[this.chengeScaleObj[1]].GetComponent<RectTransform>();
+					rectTrans2 = this.buttons[this.chengeScaleObj[0]].GetComponent<RectTransform>();
+					
+				}
+			
+			break;
+			case slider.left:
+				if(Math.Floor(flickContents.localPosition.x) <= -10.0f && this.isFlickPosi[1]){
+					this.OutsideObject();
+					this.isFlickPosi[1] = false;
+					rectTrans1 = this.buttons[this.chengeScaleObj[0]].GetComponent<RectTransform>();
+					rectTrans2 = this.buttons[this.chengeScaleObj[1]].GetComponent<RectTransform>();
+				}
+			
+			break;
+		}
+
+		this.ScaleSizeObj(rectTrans1,rectTrans2);
 	}
 
 	/*
@@ -262,4 +276,32 @@ public class FlickManager : MonoBehaviour {
 	public void OnClickWorldButtonUp(){
 
 	}
+	public void OnClickCoroshiamButtonDown(){
+		this.isButton = true;
+	}
+
+	public void OnClickCoroshiamButtonUp(){
+		
+	}
+
+	public void OnClickSummonsButtonDown(){
+		this.isButton = true;
+	}
+
+	public void OnClickSummonsButtonUp(){
+		
+	}
+
+	public void OnClickIjigenButtonDown(){
+		this.isButton = true;
+	}
+
+	public void OnClickIjigenButtonUp(){
+		
+	}
+
+
+
+
+
 }
